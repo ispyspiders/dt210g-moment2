@@ -1,0 +1,25 @@
+:root {
+    font-family: "Fredoka", Georgia, 'Times New Roman', Times, serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-feature-settings: 'liga' off;
+}
+
+body {
+    background-color: #ACC3F2;
+    margin: 0;
+    padding: 0;
+}
+
+h1,
+h2 {
+    font-family: "Fuzzy Bubbles", Georgia, 'Times New Roman', Times, serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+p {
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+}

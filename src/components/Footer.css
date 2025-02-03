@@ -1,0 +1,25 @@
+footer {
+    background-color: #3C5382;
+    padding: 1rem;
+    color: white;
+}
+
+footer p {
+    font-size: 0.875rem;
+    text-align: center;
+    margin: 0;
+}
+
+footer a {
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+}
+
+footer a:visited {
+    color: white;
+}
+
+footer a:hover {
+    color: #ACC3F2;
+}

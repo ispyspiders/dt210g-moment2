@@ -131,7 +131,7 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
                     {errors.title && <span className='error'>{errors.title}</span>}
 
                     <label htmlFor="description">Beskrivning</label>
-                    <textarea name="description" id="description" rows={4} value={formData.description}
+                    <textarea name="description" id="description" rows={4} value={formData.description != null ? formData.description : ""}
                         onChange={(event) => setFormData({ ...formData, description: event.target.value })}
                     ></textarea>
                     {errors.description && <span className='error'>{errors.description}</span>}

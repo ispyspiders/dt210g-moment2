@@ -38,7 +38,8 @@ label {
     margin-top: 1rem;
 }
 
-input[type=submit] {
+input[type=submit],
+button {
     background-color: #5F76A5;
     border: 2px solid #5F76A5;
     color: white;
@@ -65,10 +66,16 @@ input[type=submit]:hover {
     cursor: pointer;
 }
 
-#toggleForm:hover{
+#toggleForm:hover {
     margin-bottom: 4px;
 }
 
-#toggleForm.visible:hover{
-margin-bottom: -4px;
+#toggleForm.visible:hover {
+    margin-bottom: -4px;
+}
+
+@media only screen and (min-width: 600px) {
+    .formContainer {
+        grid-column: 2;
+    }
 }

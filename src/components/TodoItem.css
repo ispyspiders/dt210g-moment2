@@ -1,0 +1,75 @@
+section{
+    background-color: #F5F5F5;
+    border-radius: 0.5rem;
+    padding: 0 1rem;
+    border-top: 8px solid #F26666;
+    max-width: 250px;
+}
+
+h2{
+    margin: 0;
+    margin-left: 8px;
+    font-size: 1rem;
+}
+
+.todo-head {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+}
+
+.iconTitle-container {
+    display: flex;
+    align-items: center;
+}
+
+.todo-pending {
+    border-color: #F26666;
+}
+
+.todo-in-progress {
+    border-color: #F2B366;
+}
+
+.todo-completed {
+    border-color: #CADECC;
+}
+
+.more{
+    border-top: 1px solid #B1B1B1;
+    padding: 1rem 0;
+}
+
+select{
+    padding: 0.5rem 1rem;
+    border: 2px solid #F26666;
+    border-radius: 0.5rem;
+    width: 100%;
+}
+
+.more p {
+    color: #3C5382;
+    font-size: 1rem;
+}
+
+button{
+    border-radius: 8px;
+    border: 2px solid #F26666;
+    background-color: #FFDCDC;
+    color: #773535;
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+button span{
+    margin: 0;
+    margin-right: 8px;
+}
+
+button:hover{
+    background-color: #f7e6e6;
+
+}

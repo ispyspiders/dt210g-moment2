@@ -12,13 +12,6 @@ body {
     padding: 0;
 }
 
-#root {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100vh;
-}
-
 h1,
 h2 {
     font-family: "Fuzzy Bubbles", Georgia, 'Times New Roman', Times, serif;

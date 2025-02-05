@@ -7,17 +7,20 @@ import './TodoItem.css' // importera CSS
 
 interface TodoItemProps {
     todo: Todo;
+    onDelete: (id: number) => void;
+    onStatusChange: (updatedTodo: Todo) => void;
 }
 
 const statusOptions: Status[] = ['ej påbörjad', 'pågående', 'avklarad'];
 
 
-const TodoItem = ({ todo }: TodoItemProps) => {
+const TodoItem = ({ todo, onDelete, onStatusChange }: TodoItemProps) => {
 
     //States
     const [currentStatus, setCurrentStatus] = useState<Status>(todo.status);
     const [error, setError] = useState<string | null>(null);
     const [saving, setSaving] = useState(false);
+    const [deleteing, setDeleting] = useState(false);
 
     const getStatusIcon = () => {
         switch (currentStatus) {
@@ -75,7 +78,8 @@ const TodoItem = ({ todo }: TodoItemProps) => {
             }
             else {
                 console.log("Status uppdaterad på servern");
-                setCurrentStatus(newStatus);
+                setCurrentStatus(newStatus); 
+                onStatusChange(updatedTodo);
                 setError(null);
             }
         } catch (error) {
@@ -83,6 +87,30 @@ const TodoItem = ({ todo }: TodoItemProps) => {
             throw error;
         } finally {
             setSaving(false);
+        }
+    }
+
+    const handleDelete = async () => {
+
+        if(window.confirm("Är du säker på att du vill radera denna uppgift?")) {
+            try {
+                setDeleting(true);
+                const response = await fetch(`https://dt210g-todo.azurewebsites.net/api/todos/${todo.id}`, {
+                    method: "DELETE",
+                });
+                if(!response.ok){
+                    setError("Fel vid radering av att göra. Vänligen försök igen senare.");
+                    throw new Error('Kunde inte radera todo');
+                } else{
+                    onDelete(todo.id!);
+                    setError(null);
+                }
+            } catch (error){
+                console.error("Fel vid radering: ", error);
+                setError("Ett fel inträffade vid radering. Försök igen senare.")
+            } finally{
+                setDeleting(false);
+            }
         }
     }
 
@@ -104,11 +132,11 @@ const TodoItem = ({ todo }: TodoItemProps) => {
                         ))
                     }
                 </select>
-                {saving && <span>Sparar...</span>}
+                {saving && <span className='msg'>Sparar...</span>}
                 {error && <span className='error'>{error}</span>}
                 <p>{todo.description}</p>
-
-                <button><span>Radera</span> <Trash size={20}/></button>
+                <button onClick={handleDelete}><span>Radera</span> <Trash size={20}/></button>
+                {deleteing && <span className='msg'>Raderar...</span>}
             </div>
         </section>
     )

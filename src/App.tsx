@@ -40,6 +40,15 @@ function App() {
   const addTodo = (newTodo: Todo) => {
     setTodos((prevTodos) => [...prevTodos, newTodo]);
   }
+
+  const handleDeleteTodo = (id:number) => {
+    setTodos(todos.filter(todo=>todo.id !== id));
+  };
+
+  const updateTodoStatus = (updatedTodo: Todo) => {
+    setTodos((prevTodos)=> prevTodos.map(todo => todo.id === updatedTodo.id ? updatedTodo: todo));
+  };
+
   return (
     <>
       <Header pagetitle="Att göra" />
@@ -53,7 +62,7 @@ function App() {
             loading && <p>Laddar in att göra lista...</p>
           }
           {/* Lista med todos, Skickar todos till TodoList */}
-          <TodoList todos={todos}/>
+          <TodoList todos={todos} onDelete={handleDeleteTodo} onStatusChange={updateTodoStatus}/>
           {/* Formulär för att lägga till Todo, Skickar addTodo som prop till TodoForm */}
           <TodoForm addTodo={addTodo} />
         </main>

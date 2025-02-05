@@ -19,11 +19,6 @@ body {
     height: 100vh;
 }
 
-main {
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
 h1,
 h2 {
     font-family: "Fuzzy Bubbles", Georgia, 'Times New Roman', Times, serif;
@@ -34,10 +29,4 @@ h2 {
 p {
     font-size: 1rem;
     letter-spacing: 0.1rem;
-}
-
-@media only screen and (min-width: 600px) {    
-    main{
-        grid-template-columns: 1fr 1fr;
-    }
 }

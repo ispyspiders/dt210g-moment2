@@ -4,6 +4,9 @@
 
 En applikation som fungerar som en "att göra"-lista, skapad med React och TypeScript. Applikationen kommunicerar med ett backend-API som hanterar CRUD-funktioner för todo-objekt.
 
+Länk till publicerad applikation: 
+https://dt210g-todo.netlify.app/
+
 ## Uppgiftsbeskrivning
 ### Backend-API
 #### Funktionella krav

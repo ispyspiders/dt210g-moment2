@@ -36,38 +36,6 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
     });
 
     // Metoder
-    // API-anrop
-    const sendToApi = async (todo: Todo) => {
-        try {
-            const body = {
-                "title": todo.title,
-                "description": todo.description
-            };
-
-            // Om beskrivning inte har innehåll / är null, sätt till undefined
-            if (todo.description == null || todo.description.length <= 0) {
-                body.description = undefined;
-            }
-
-            const response = await fetch("https://dt210g-todo.azurewebsites.net/api/todos", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(body),
-            });
-
-            if (!response.ok) {
-                throw new Error("Något gick fel vid skapandet av Todo");
-            }
-
-            return response.json(); //returnera sparat todo från servern
-        } catch (error) {
-            console.error("Fel vid API-anrop: ", error);
-            throw error;
-        };
-    }
-
 
     // Skicka formulär/skapa todo
     const submitForm = async (event: React.FormEvent) => {
@@ -78,12 +46,9 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
             // Validera input
             await validationSchema.validate(formData, { abortEarly: false });
 
-            // Anropa webbtjänst
-            const savedTodo = await sendToApi(formData);
-
+            const newTodo = formData;
             // om lyckat, skicka Todo till föräldrakomponent för att lägga till i listan
-            addTodo(savedTodo);
-
+            addTodo(newTodo);
             setErrors({}); //nollställ felmeddelanden
             setFormData({ title: "", description: "", status: 'ej påbörjad' });  // Rensa formulärfält och sätt status till 'ej påbörjad'
         } catch (errors) {

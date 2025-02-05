@@ -37,16 +37,40 @@ function App() {
     }
   }
 
-  const addTodo = (newTodo: Todo) => {
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
+  const addTodo = async (newTodo: Todo) => {
+    try {
+      if (newTodo.description == null || newTodo.description.length <= 0) {
+        newTodo.description = undefined;
+      }
+
+      const response = await fetch("https://dt210g-todo.azurewebsites.net/api/todos", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTodo),
+      });
+
+      if(!response.ok) {
+        throw new Error("Något gick fel vid skapandet av Todo");
+      }
+      // Om OK svar, Spara skapad todo och uppdatera lista
+      const createdTodo = await response.json();
+      setTodos((prevTodos) => [...prevTodos, createdTodo]);
+      setError(null);
+    } catch(error){
+      setError("Något gick fel vid skapandet av att göra. Vänligen försök igen senare.");
+      console.error("Fel vid API-anrop: ", error);
+      throw error;    }
+
   }
 
-  const handleDeleteTodo = (id:number) => {
-    setTodos(todos.filter(todo=>todo.id !== id));
+  const handleDeleteTodo = (id: number) => {
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
   const updateTodoStatus = (updatedTodo: Todo) => {
-    setTodos((prevTodos)=> prevTodos.map(todo => todo.id === updatedTodo.id ? updatedTodo: todo));
+    setTodos((prevTodos) => prevTodos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo));
   };
 
   return (
@@ -62,7 +86,7 @@ function App() {
             loading && <p>Laddar in att göra lista...</p>
           }
           {/* Lista med todos, Skickar todos till TodoList */}
-          <TodoList todos={todos} onDelete={handleDeleteTodo} onStatusChange={updateTodoStatus}/>
+          <TodoList todos={todos} onDelete={handleDeleteTodo} onStatusChange={updateTodoStatus} />
           {/* Formulär för att lägga till Todo, Skickar addTodo som prop till TodoForm */}
           <TodoForm addTodo={addTodo} />
         </main>

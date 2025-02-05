@@ -1,0 +1,23 @@
+#todoList {
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    align-items: baseline;
+    padding-bottom: 8rem;
+    
+}
+
+@media only screen and (min-width: 540px) {
+    #todoList {
+        grid-template-columns: 1fr 1fr;
+        max-width: 540px;
+        margin: auto;
+    }
+}
+@media only screen and (min-width: 750px) {
+    #todoList {
+        grid-template-columns: 1fr 1fr 1fr;
+        max-width: 750px;
+    }
+}
